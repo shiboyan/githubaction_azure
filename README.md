@@ -18,7 +18,8 @@ az ad sp create-for-rbac --name myServicePrincipalName1 --role reader --scopes /
 ```
 #### Configure the cred in the github setting
 ![img_2.png](img_2.png)
-#### Also put the terraform backend location in the setting,include backend tf storage account location , rg location etc, by doing this can better record terraform state
+ Also put the terraform backend location in the setting,include backend tf storage account location , rg location etc, by doing this can better record terraform state
+
 ## Getting Started
 After finished the cred setting then we can get start 
 This pipeline include 3 env ,and when push the code to different branch it will trigger to deploy to different env.
