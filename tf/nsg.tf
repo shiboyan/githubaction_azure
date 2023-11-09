@@ -15,6 +15,7 @@ resource "azurerm_network_security_group" "nsg" {
 
     "Environment" = var.enviroment.tag
   }
+  depends_on = [azurerm_resource_group.rg]
 
 }
 
