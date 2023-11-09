@@ -8,13 +8,12 @@
     tenant_id       = var.tenant_id
 #  skip_provider_registration = true
 }
-
- terraform {
-   required_providers {
-     azurerm = {
-       source  = "hashicorp/azurerm"
-       version = "=3.43.0"
-     }
-   }
-   required_version = ">=1.1.7"
- }
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "3.12.0"
+    }
+  }
+  required_version = ">=1.1.7"
+}
