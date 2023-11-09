@@ -11,7 +11,6 @@ terraform {
     storage_account_name = "tfdevaction"
     container_name       = "devtfstate"
     key                  = "dev.tfstate"
-    use_oidc             = true
   }
 }
 
