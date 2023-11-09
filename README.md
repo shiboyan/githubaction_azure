@@ -1,2 +1,1 @@
-# githubaction_azure
-githubaction_azure
+# azure_terraform
