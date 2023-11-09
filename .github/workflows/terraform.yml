@@ -47,7 +47,6 @@ jobs:
         id: init
         run: |
           terraform init
-          terraform workspace select ${{ env.environment }}
       - name: Terraform
         run: terraform fmt -check
       - name: 'Terraform Validate'
