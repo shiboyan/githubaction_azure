@@ -50,7 +50,7 @@ jobs:
           resource_group_name: rg-dev-tf
           container_name: devtfstate
           storage_account_name: tfdevaction
-          tf_working_directory: ${{env.working-directory}}
+          tf_working_directory: ./tf
 
       - name: Terraform
         run: terraform fmt -check
