@@ -5,6 +5,7 @@ terraform {
       version = ">= 3.7.0"
     }
   }
+  required_version = ">=1.1.7"
   backend "azurerm" {
     resource_group_name  = "rg-dev-tf"
     storage_account_name = "tfdevaction"
@@ -12,4 +13,11 @@ terraform {
     key                  = "dev.tfstate"
     use_oidc             = true
   }
+}
+
+provider "azurerm" {
+  use_oidc = true
+  features {
+  }
+  skip_provider_registration = true
 }
