@@ -17,10 +17,10 @@ jobs:
   terraform-dev:
     name: 'TerraformDev'
     env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_CLIENT_ID: ${{ env.secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ env.secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ env.secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ env.secrets.AZURE_TENANT_ID }}
       environment: dev
       tf_actions_working_dir: ./tf
     runs-on: ubuntu-latest
@@ -35,18 +35,16 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to Azure
         uses: azure/login@v1
-#        with:
-#          tenant-id: ${{ env.ARM_TENANT_ID }}
-#          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
-#          client-id: ${{ env.ARM_CLIENT_ID }}
         with:
-          creds: ${{ env.AZURE_CREDENTIALS }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+          client-id: ${{ env.ARM_CLIENT_ID }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
       - name: 'Terraform Init'
         id: init
         run: |
-          terraform init
+          terraform init 
           terraform workspace select ${{ env.environment }} || terraform workspace new ${{ env.environment }}
 
       - name: Terraform
