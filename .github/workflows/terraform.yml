@@ -59,13 +59,13 @@ jobs:
       - name: Terraform Plan
 #        id: plan
 #        if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false -out=tf.plan
+        run: terraform plan -no-color -input=false -out=plan.out
         continue-on-error: true
       - name: Terraform Apply
 #        if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
 #        if: github.event_name == 'push'
 #        run: terraform apply -auto-approve -var="AZURE_SUBSCRIPTION_ID=$(PAT)" -var="password=$(PASSWORD)"
 #        run: terraform apply -auto-approve -input=false
-        run: terraform apply -auto-approve -input=tf.plan
+        run: terraform apply plan.out
         
 
