@@ -41,16 +41,11 @@ jobs:
           client-id: ${{ env.ARM_CLIENT_ID }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: "1.1.7"
-      - name: Terraform init azurerm backend
-        uses: ahmedig/terraform-azurerm-backend@v4
-        with:
-          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-          resource_group_name: rg-dev-tf
-          container_name: devtfstate
-          storage_account_name: tfdevaction
-          tf_working_directory: ./tf
+      - name: 'Terraform Init'
+        id: init
+        run: |
+          terraform init
+          terraform workspace select ${{ env.environment }} || terraform workspace new ${{ env.environment }}
 
       - name: Terraform
         run: terraform fmt -check
