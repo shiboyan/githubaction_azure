@@ -43,9 +43,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: "1.1.7"
-      - name: checkout backend
-        run: sh check_tfstate.sh
-        shell: bash
       - name: 'Terraform Init'
         id: init
         run: |
