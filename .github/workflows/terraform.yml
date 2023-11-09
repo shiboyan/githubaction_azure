@@ -43,14 +43,15 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: "1.1.7"
-      - name: checkout backend
-        run: sh check_tfstate.sh
-        shell: bash
-      - name: 'Terraform Init'
-        id: init
-        run: |
-          terraform init -backend-config="key=dev.tfstate" -backend-config="resource_group_name=rg-dev-tf" -backend-config="storage_account_name=tfdevaction"
-          terraform workspace select ${{ env.environment }}
+      - name: Terraform init azurerm backend
+        uses: ahmedig/terraform-azurerm-backend@v4
+        with:
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          resource_group_name: rg-dev-tf
+          container_name: devtfstate
+          storage_account_name: tfdevaction
+          tf_working_directory: ${{env.working-directory}}
+
       - name: Terraform
         run: terraform fmt -check
       - name: 'Terraform Validate'
