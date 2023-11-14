@@ -8,7 +8,7 @@ terraform {
   backend "azurerm" {
     use_oidc             = true
     resource_group_name  = "rg-dev-tf"
-    storage_account_name = "tfdevaction"
+    storage_account_name = "tfgitaction"
     container_name       = "devtfstate"
     key                  = "dev.tfstate"
   }
